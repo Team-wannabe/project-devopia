@@ -4,6 +4,9 @@ import InfoCard from "../component/card";
 import Sidenav from "../component/sidenav";
 import SaveCard from "../component/card-2";
 import StockList from "../component/toptable";
+import SimpleAreaChart from "../component/Graph";
+import InvestmentComponent from "../component/card-dash";
+import StockTable from "../component/toptable";
 
 export const Dashboard = () => {
   return (
@@ -38,6 +41,11 @@ export const Dashboard = () => {
       <Box>
       <iframe width="1150" height="400" src="https://rss.app/embed/v1/wall/trle22W9o8UTorHS" frameborder="0"></iframe>
       </Box>
+      <Box mt={4} display={"flex"} justifyContent={"space-between"}>
+      <SimpleAreaChart />
+      <InvestmentComponent />
+      </Box>
+      <StockTable/>
     </Container>
     </Box>
   );

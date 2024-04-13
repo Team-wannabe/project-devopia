@@ -20,6 +20,7 @@ const rows = [
 
 const StockTable = () => {
   return (
+    <Paper elevation={3} sx={{ padding: 2 }}>
     <TableContainer component={Paper} >
         <Typography variant="h5" component="div" style={{textAlign: "start", padding: "1rem",color:'blue'}}>
             Top Stocks
@@ -51,6 +52,7 @@ const StockTable = () => {
         </TableBody>
       </Table>
     </TableContainer>
+    </Paper>
   );
 };
 
