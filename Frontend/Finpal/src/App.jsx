@@ -1,13 +1,14 @@
+// landing page
+import { Box, Typography } from '@mui/material'
 import './App.css'
-import { Box } from '@material-ui/core'
 
 function App() {
  
 
   return (
-    <Box>
-      
-    </Box>
+      <Box>
+        <Typography variant="h1" align="center">Welcome to the App</Typography>
+      </Box>
   )
 }
 
