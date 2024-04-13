@@ -122,6 +122,31 @@ def whatsapp_bot():
             for timestamp, amount in credit_data.items():
                 income_message += f"{timestamp}: ₹{amount}\n"
         msg.body(income_message)
+
+    elif 'stocks' in incoming_msg:
+        print("match?")
+        pattern = r'bought stocks ([A-Z]+) at rs (\d+(?:\.\d+)?) quantity (\d+)'
+        match = re.search(pattern, incoming_msg)
+        print("match?")
+        if match:
+            print("test")
+            symbol = match.group(1)
+            purchase_price = float(match.group(2))
+            quantity = int(match.group(3))
+            
+            data = {
+                'email': email,
+                'symbol': symbol,
+                'quantity': quantity,
+                'purchase_price': purchase_price
+            }
+            coll_ref = db.collection('users')
+            doc_ref = coll_ref.document(email).collection('portfolio').document(symbol)
+            doc_ref.set(data)
+            msg.body(f"{symbol}, at {purchase_price} of quantity {quantity} added to portfolio")
+
+        else:
+            msg.body("Please enter the correct format")
     else:
         msg.body(f"Sorry, I didn't get that. Please type 'portfolio' to see your portfolio")
 
