@@ -31,9 +31,9 @@ def adding_to_portfolio():
     # data = {}
     global email
     email = 'adityachavan271@gmail.com'
-    symbol = 'YESBANK'
-    quantity = 11
-    purchase_price = 25
+    symbol = 'HDFCBANK'
+    quantity = 1
+    purchase_price = 1500
 
     data = {
         'email': email,
