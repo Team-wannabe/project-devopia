@@ -3,13 +3,9 @@ import Sidenav from "../component/sidenav";
 import SimpleAreaChart from "../component/Graph";
 import InvestmentComponent from "../component/card-dash";
 import StockTable from "../component/toptable";
-<<<<<<< HEAD
 import Cumulative from "../component/cumulative";
 import Expense from "../component/Expense";
 import BalanceComponent from "../component/Blances";
-=======
-import SIPCard from "../component/SIPCard";
->>>>>>> 564c7798b6f9d1f18c4d444a3bfa38016d0b57a8
 
 export const Dashboard = () => {
   return (
