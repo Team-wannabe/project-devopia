@@ -31,9 +31,9 @@ def adding_to_portfolio():
     # data = {}
     global email
     email = 'adityachavan271@gmail.com'
-    symbol = 'HDFCBANK'
-    quantity = 1
-    purchase_price = 1500
+    symbol = 'AXISBANK'
+    quantity = 100
+    purchase_price = 100
 
     data = {
         'email': email,
@@ -96,4 +96,4 @@ def your_portfolio():
         'symbols_data': symbols_data
     }
 
-    return jsonify(overall_data)
+    return overall_data
