@@ -4,8 +4,11 @@ import time
 import json
 from twelvedata import TDClient
 
-url = 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=YESBANK&interval=5min&apikey=5O6XB3Y5ZVXQTVMD'
+
+symbol = input("Enter a stock symbol: ")
+url = f'http://localhost:3000/api/equity/{symbol}'
 r = requests.get(url)
 data = r.json()
+lastprice = data.get('priceInfo', {}).get('lastPrice')
 
-print(data)
+print(lastprice)
