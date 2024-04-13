@@ -1,5 +1,5 @@
 import * as React from "react";
-import { LineChart } from "@mui/x-charts/LineChart";
+import { LineChart } from "@mui/x-charts";
 import { Box, Chip, Paper, Stack, Typography } from "@mui/material";
 
 const uData = [4000, 3000, 2000, 2780, 1890, 2390, 3490];

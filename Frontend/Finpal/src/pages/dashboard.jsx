@@ -7,6 +7,7 @@ import StockList from "../component/toptable";
 import SimpleAreaChart from "../component/Graph";
 import InvestmentComponent from "../component/card-dash";
 import StockTable from "../component/toptable";
+import SIPCard from "../component/SIPCard";
 
 export const Dashboard = () => {
   return (
@@ -46,7 +47,10 @@ export const Dashboard = () => {
       <InvestmentComponent />
       </Box>
       <StockTable/>
+      <br />
+      <SIPCard />
     </Container>
+    
     </Box>
   );
 };
