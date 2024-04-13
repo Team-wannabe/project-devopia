@@ -1,15 +1,14 @@
-// landing page
-import { Box, Typography } from '@mui/material'
-import './App.css'
+import { BrowserRouter } from 'react-router-dom';
+import { Router } from "./Router";
 
-function App() {
- 
-
+const App = () => {
   return (
-      <Box>
-        <Typography variant="h1" align="center">Welcome to the App</Typography>
-      </Box>
+    <>
+        <BrowserRouter>
+          <Router />
+        </BrowserRouter>
+    </>
   )
 }
 
-export default App
+export default App;
