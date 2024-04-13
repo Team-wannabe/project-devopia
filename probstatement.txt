@@ -1,0 +1,30 @@
+Problem Statement: Financial Wellness Platform for Individuals and Families
+Description: Despite the availability of various financial instruments, individuals struggle
+to manage their finances efficiently, especially when it comes to investments and savings,
+providing users with a centralised platform to manage their investments, savings, and
+overall financial well-being.
+
+
+Requirements:
+1. Unified Financial Dashboard: Develop a user-friendly dashboard where users can
+access all their savings and investment details in one place.
+2. Risk Assessment: Implement a feature that assesses the risk associated with
+different investment types and provides users with insights into their cumulative
+risk exposure.
+3. Family Financial Management: Enable users to add family members and their
+investments to the platform, allowing for a holistic view of the family's financial
+health.
+4. Net Worth Calculation: Incorporate a net worth calculator that considers all assets,
+liabilities, and insurance plans to provide users with an accurate assessment of
+their financial standing.
+5. Personalised Recommendations: Utilise AI and machine learning algorithms to offer
+personalised recommendations for optimising savings, investments, and insurance
+coverage based on individual parameters such as age, marital status, and job type.
+
+6. Risk Adjustment Guide: Provide users with a comprehensive guide for making
+adjustments to their financial portfolio based on their risk assessment and personal
+circumstances
+Expected Outcome: Deliver a robust web application that empowers users to take control
+of their financial well-being by providing them with actionable insights, personalised
+recommendations, and a holistic view of their financial portfolio within a user-friendly
+interface.
