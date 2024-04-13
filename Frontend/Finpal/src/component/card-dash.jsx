@@ -7,6 +7,7 @@ const InvestmentComponent = () => {
     { name: 'Stocks', amount: '₹20K', percentage: 20, icon: <InsertChartOutlined /> },
     { name: 'Mutual funds', amount: '₹50K', percentage: 50, icon: <AccountBalanceWalletOutlined /> },
     { name: 'NPS', amount: '₹30K', percentage: 30, icon: <SavingsOutlined /> },
+    { name: 'Savings Account', amount: '₹10K', percentage: 10, icon: <AddCircleOutlineOutlined /> },
   ];
 
   const progressBarColor = (value) => {

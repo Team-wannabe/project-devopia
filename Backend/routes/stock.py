@@ -54,7 +54,7 @@ def your_portfolio():
     # email = request.args.get('email')
     # if not email:
         # return jsonify({'error': 'Email is required'}), 400
-    
+    email = 'adityachavan271@gmail.com'
     coll_ref = db.collection('users').document(email).collection('portfolio')
     docs = coll_ref.stream()
 

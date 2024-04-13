@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -11,47 +12,72 @@ import TrendingDownIcon from '@mui/icons-material/TrendingDown';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { Typography } from '@mui/material';
 
-// Define the stock data
-const rows = [
-  { id: 'SBIN', name: 'State Bank of India', price: 766.55, change: -12.50, percentage: -1.60 },
-  { id: 'ITC', name: 'ITC Ltd', price: 430.50, change: -6.45, percentage: -1.48 },
-  // Add more rows as needed...
-];
-
 const StockTable = () => {
+  const [stocks, setStocks] = useState([]);
+  const [total, setTotal] = useState({ currentValue: 0, investment: 0, returns: 0 });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:8080/your-portfolio');
+        setStocks(response.data.symbols_data);
+        setTotal({
+          currentValue: response.data.total_current_value,
+          investment: response.data.total_investment,
+          returns: response.data.total_return
+        });
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <Paper elevation={3} sx={{ padding: 2 }}>
-    <TableContainer component={Paper} >
-        <Typography variant="h5" component="div" style={{textAlign: "start", padding: "1rem",color:'blue'}}>
-            Top Stocks
+      <TableContainer component={Paper}>
+        <Typography variant="h5" component="div" style={{ textAlign: "start", padding: "1rem", color: 'blue' }}>
+            Your Portfolio
         </Typography>
-      <Table  aria-label="simple table">
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.id}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.id}
-              </TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell align="right">{`₹${row.price.toFixed(2)}`}</TableCell>
-              <TableCell align="right" sx={{ color: 'red' }}>
-                {`₹${row.change.toFixed(2)}`}
-                <TrendingDownIcon fontSize="small" sx={{ verticalAlign: 'middle', ml: 1 }} />
-              </TableCell>
-              <TableCell align="right" sx={{ color: 'red' }}>{`${row.percentage.toFixed(2)}%`}</TableCell>
-              <TableCell>
-                <IconButton color="primary" aria-label="add to watchlist">
-                  <AddCircleOutlineIcon />
-                </IconButton>
-              </TableCell>
+        <Table aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Symbol</TableCell>
+              <TableCell>Current Price</TableCell>
+              <TableCell>Purchase Price</TableCell>
+              <TableCell>Quantity</TableCell>
+              <TableCell>Current Value</TableCell>
+              <TableCell>Investment</TableCell>
+              <TableCell>Returns</TableCell>
+              <TableCell>Add to Watchlist</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {stocks.map((stock) => (
+              <TableRow key={stock.symbol}>
+                <TableCell component="th" scope="row">
+                  {stock.symbol}
+                </TableCell>
+                <TableCell>{`₹${stock.current_price.toFixed(2)}`}</TableCell>
+                <TableCell>{`₹${stock.purchase_price.toFixed(2)}`}</TableCell>
+                <TableCell>{stock.quantity}</TableCell>
+                <TableCell>{`₹${stock.current_value.toFixed(2)}`}</TableCell>
+                <TableCell>{`₹${stock.investment.toFixed(2)}`}</TableCell>
+                <TableCell>{`₹${stock.returns.toFixed(2)}`}</TableCell>
+                <TableCell>
+                  <IconButton color="primary" aria-label="add to watchlist">
+                    <AddCircleOutlineIcon />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <Typography variant="h6" component="div" style={{ textAlign: "center", padding: "1rem" }}>
+        Total Investment: ₹{total.investment.toFixed(2)}, Total Value: ₹{total.currentValue.toFixed(2)}, Total Returns: ₹{total.returns.toFixed(2)}
+      </Typography>
     </Paper>
   );
 };
