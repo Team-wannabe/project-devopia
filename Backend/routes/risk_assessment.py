@@ -80,12 +80,12 @@ def monte_carlo_risk_assessment(total_overall_investment, total_overall_returns,
     else:
         risk_assessment = "Low Risk"
 
-    return {
+    return jsonify({
         'Mean ROI': mean_roi,
         'Standard Deviation of ROI': std_dev_roi,
         'Actual ROI': actual_roi,
         'Risk Assessment': risk_assessment
-    }
+    })
 
 
 
