@@ -28,6 +28,13 @@ def monte_carlo_risk_assessment(total_overall_investment, total_overall_returns,
         'real_estate': 0.02, 
         'others': 0.01    
     }
+    stocks=0.4,
+    bonds=0.3,
+    cash=0.1,
+    gold=0.1,
+    real_estate=0.1,
+    others=0.0,
+    num_simulations=100
 
     simulated_rois = []
 
