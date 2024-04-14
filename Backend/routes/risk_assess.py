@@ -1,5 +1,17 @@
-from flask import jsonify
+from flask import Flask, request, redirect, Blueprint, render_template, jsonify
+import requests
+from datetime import datetime
+from credentials.firebase_config import db
+import numpy as np
+from sklearn.linear_model import LinearRegression
+import statistics
+import random
 
+
+risk_assess_bp = Blueprint('risk_assess', __name__)
+
+
+@risk_assess_bp.route('/risk_assess', methods=['GET', 'POST'])
 def calculate_portfolio_risk(total_investment, stock_investment, bonds_investment, gold_investment, cash_investment, real_estate_investment):
     stock_percentage = stock_investment / total_investment
     bonds_percentage = bonds_investment / total_investment
@@ -35,13 +47,3 @@ def calculate_portfolio_risk(total_investment, stock_investment, bonds_investmen
     print(risk_level)
     return jsonify({'risk_level': risk_level, 'total_risk': total_risk})
 
-# Example usage
-total_investment = 1000000
-stock_investment = 600000
-bonds_investment = 100000
-gold_investment = 50000
-cash_investment = 50000
-real_estate_investment = 200000
-
-risk = calculate_portfolio_risk(total_investment, stock_investment, bonds_investment, gold_investment, cash_investment, real_estate_investment)
-print("Risk associated with the investment portfolio:", risk)

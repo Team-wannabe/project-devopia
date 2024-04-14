@@ -9,6 +9,8 @@ from routes.risk_assessment import risk_assessment_bp
 
 app = Flask(__name__)
 app.secret_key = "devopia"
+# CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
+CORS(app)
 
 app.register_blueprint(risk_assessment_bp)
 app.register_blueprint(stock_bp)
@@ -16,7 +18,7 @@ app.register_blueprint(whatsapp_bot_bp)
 app.register_blueprint(personal_finance_bp)
 
 
-CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))

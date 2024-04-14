@@ -26,27 +26,46 @@ def fetch_current_price(symbol):
 """ROUTES"""
 # @stock_bp.route('/api/equity', methods=['GET'])
 
-@stock_bp.route('/adding-to-portfolio/', methods=['GET', 'POST'])
+# @stock_bp.route('/adding-to-portfolio/', methods=['GET', 'POST', 'OPTIONS'])
+@stock_bp.route('/adding-to-portfolio', methods=['OPTIONS', 'POST'])
 def adding_to_portfolio():
-    # data = {}
-    global email
+    if request.method == 'OPTIONS':
+        # Handle preflight request by returning the necessary CORS headers
+        response = jsonify({'message': 'Preflight request handled successfully'})
+        response.headers.add('Access-Control-Allow-Origin', '*')  # Change '*' to your allowed origin
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+        response.headers.add('Access-Control-Allow-Methods', 'POST')
+        return response
+
+    # Handle POST request to add data to the portfolio
+    data = request.get_json()
     email = 'adityachavan271@gmail.com'
-    symbol = 'AXISBANK'
-    quantity = 100
-    purchase_price = 100
+    symbol = data.get('stock')
+    quantity = data.get('quantity')
+    purchase_price = data.get('price')
+
+    if None in (symbol, quantity, purchase_price):
+        return jsonify({'error': 'Incomplete data provided'}), 400
+
+    try:
+        investment = float(quantity) * float(purchase_price)
+    except ValueError:
+        return jsonify({'error': 'Invalid quantity or purchase price provided'}), 400
 
     data = {
         'email': email,
         'symbol': symbol,
         'quantity': quantity,
-        'purchase_price': purchase_price
+        'purchase_price': purchase_price,
+        # 'investment': investment  # Include investment in the data to be stored
     }
-    
+    print(data)
+
     coll_ref = db.collection('users')
     doc_ref = coll_ref.document(email).collection('portfolio').document(symbol)
 
     doc_ref.set(data)
-    return jsonify({'message': 'Data added to portfolio'})
+    return jsonify({'message': 'Data added to portfolio'}), 200
 
 @stock_bp.route('/your-portfolio', methods=['GET', 'POST'])
 def your_portfolio():
