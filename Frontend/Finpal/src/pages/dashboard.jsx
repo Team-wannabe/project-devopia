@@ -17,7 +17,6 @@ export const Dashboard = () => {
       <InvestmentComponent />
       </Box>
       <StockTable/>
-<<<<<<< HEAD
       <Box mt={4} display={"flex"}>
       <Cumulative />
       <Expense />
@@ -26,12 +25,6 @@ export const Dashboard = () => {
       <iframe width="1150" height="400" src="https://rss.app/embed/v1/wall/trle22W9o8UTorHS" frameborder="0"></iframe>
     </Container>
    
-=======
-      <br />
-      <SIPCard />
-    </Container>
-    
->>>>>>> 564c7798b6f9d1f18c4d444a3bfa38016d0b57a8
     </Box>
   );
 };
