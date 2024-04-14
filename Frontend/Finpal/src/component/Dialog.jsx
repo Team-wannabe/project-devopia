@@ -37,10 +37,23 @@ export default function StockDialog() {
     };
 
     try {
-      // Perform the API call to add the stock to the portfolio
-      const response = await axios.post('http://127.0.0.1:8080/adding-to-portfolio', stockData);
-      console.log('Stock added successfully:', response.data);
-      handleClose(); // Close the dialog on success
+      // Perform the API call to add the stock to the portfolio using fetch
+      const response = await fetch('http://127.0.0.1:8080/adding-to-portfolio', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(stockData),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to add stock to portfolio');
+      }
+  
+      const responseData = await response.json();
+      console.log('Stock added successfully:', responseData);
+      handleClose();
+      window.location.reload() // Close the dialog on success
     } catch (error) {
       console.error('Failed to add stock to portfolio:', error);
       // Handle errors here, such as displaying an error message
