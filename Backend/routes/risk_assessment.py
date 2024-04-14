@@ -19,7 +19,7 @@ import random
 risk_assessment_bp = Blueprint('risk_assessment', __name__)
 
 @risk_assessment_bp.route('/risk_assessment', methods=['GET', 'POST'])
-def monte_carlo_risk_assessment(total_overall_investment, total_overall_returns, stocks, bonds, cash, gold, real_estate, others, num_simulations):
+def monte_carlo_risk_assessment():
     risk_factors = {
         'stocks': 0.9,  
         'bonds': 0.01,   
@@ -28,13 +28,15 @@ def monte_carlo_risk_assessment(total_overall_investment, total_overall_returns,
         'real_estate': 0.02, 
         'others': 0.01    
     }
-    stocks=0.4,
-    bonds=0.3,
-    cash=0.1,
-    gold=0.1,
-    real_estate=0.1,
-    others=0.0,
-    num_simulations=100
+    total_overall_investment=100000
+    total_overall_returns=80000 
+    stocks=0.4
+    bonds=0.3
+    cash=0.1
+    gold=0.1
+    real_estate=0.1
+    others=0.0
+    num_simulations=6000
 
     simulated_rois = []
 
