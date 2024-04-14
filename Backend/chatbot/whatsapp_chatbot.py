@@ -14,17 +14,19 @@ whatsapp_bot_bp = Blueprint('whatsapp_bot', __name__)
 @whatsapp_bot_bp.route('/whatsappbot', methods=['GET', 'POST'])
 def whatsapp_bot():
     incoming_msg = request.values.get('Body', '').lower()
+    print(incoming_msg)
+    
     resp = MessagingResponse()
     msg = resp.message()
 
     responded = False
-    from routes.stock import email, your_portfolio
+    from routes.stock import your_portfolio
 
     currency_pattern = r'(?:(?<!\S)(?:₹|Rs?|\$)\s*(\d+(?:\.\d+)?)|(?:rs?)\s*(\d+(?:\.\d+)?)\s*(?!\S))'
 
     amounts = re.findall(currency_pattern, incoming_msg)
-    from routes.stock import email, your_portfolio
-
+    from routes.stock import your_portfolio
+    email = "adityachavan271@gmail.com"
     if amounts:
         amount_to_add = None
         for match in amounts:
@@ -110,24 +112,14 @@ def whatsapp_bot():
             for timestamp, amount in expense_data.items():
                 expenditure_message += f"{timestamp}: ₹{amount}\n"
         msg.body(expenditure_message)
-
-
-
-    elif 'show income' in incoming_msg:
-        coll_ref = db.collection('users').document(f'{email}').collection('credits')
-        credits = coll_ref.stream()
-        income_message = "Here is your income:\n\n"
-        for credit in credits:
-            credit_data = credit.to_dict()
-            for timestamp, amount in credit_data.items():
-                income_message += f"{timestamp}: ₹{amount}\n"
-        msg.body(income_message)
-
-    elif 'stocks' in incoming_msg:
+    
+    if 'bought' in incoming_msg:
         print("match?")
-        pattern = r'bought stocks ([A-Z]+) at rs (\d+(?:\.\d+)?) quantity (\d+)'
+        pattern = r'bought stocks ([a-zA-Z]+) at rs (\d+(?:\.\d+)?) quantity (\d+)'
         match = re.search(pattern, incoming_msg)
         print("match?")
+        print(incoming_msg)
+        print(f"Match result: {match}")
         if match:
             print("test")
             symbol = match.group(1)
@@ -147,8 +139,22 @@ def whatsapp_bot():
 
         else:
             msg.body("Please enter the correct format")
-    else:
-        msg.body(f"Sorry, I didn't get that. Please type 'portfolio' to see your portfolio")
+
+
+
+    elif 'show income' in incoming_msg:
+        coll_ref = db.collection('users').document(f'{email}').collection('credits')
+        credits = coll_ref.stream()
+        income_message = "Here is your income:\n\n"
+        for credit in credits:
+            credit_data = credit.to_dict()
+            for timestamp, amount in credit_data.items():
+                income_message += f"{timestamp}: ₹{amount}\n"
+        msg.body(income_message)
+
+    
+    # else:
+    #     msg.body(f"Sorry, I didn't get that. Please type 'portfolio' to see your portfolio")
 
     return str(resp)
 
