@@ -3,6 +3,28 @@ import Sidenav from "../component/sidenav";
 import { PieChart, pieArcLabelClasses } from "@mui/x-charts/PieChart";
 import { BarChart } from '@mui/x-charts/BarChart';
 import StockTable from "../component/toptable";
+import BasicTable from "./stockspersonlized";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  IconButton
+} from '@mui/material';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+
+
+function createData(name, currentPrice, change, percentageChange) {
+  return { name, currentPrice, change, percentageChange };
+}
+
+const rows = [
+    createData('State Bank of India', '₹766.55', '₹-12.50', '-1.60%'),
+    createData('ITC Ltd', '₹430.50', '₹-6.45', '-1.48%'),
+    createData('S&P 500', '5,123.41', '-75.65', '-1.46%'),
+  ];
 
 const data = [
   { value: 5, label: "Su" },
@@ -15,6 +37,8 @@ const size = {
   width: 400,
   height: 200,
 };
+
+
 
 export default function Family() {
   return (
@@ -63,13 +87,59 @@ export default function Family() {
     />
         </Paper>
         </Box>
-        <Paper elevation={3} sx={{ padding: 2, ml: 12, mt: 4 }}>
-            <Typography variant="body" ml={24} color={"gray"}>
-                Total Members Investments
-            </Typography>
-            
-        </Paper>
+        
       </Box>
+      <br />
+      <Box>
+    <Typography variant="body 1" marginLeft={32}>
+        Member Name: Aditya
+    </Typography>
+    <Box ml={32} mt={2}>
+    <Typography variant="h5" gutterBottom>
+    Your Stock Portfolio
+  </Typography>
+    <TableContainer component={Paper} sx={{width:'73rem'}}>
+      <Table aria-label="simple table" >
+        <TableHead>
+          <TableRow>
+            <TableCell>Stock</TableCell>
+            <TableCell align="right">Invested Amount</TableCell>
+            <TableCell align="right">Change</TableCell>
+            <TableCell align="right">%</TableCell>
+            <TableCell align="right"></TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody >
+          {rows.map((row) => (
+            <TableRow
+              key={row.name}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+                {row.name}
+              </TableCell>
+              <TableCell align="right">{row.currentPrice}</TableCell>
+              <TableCell align="right" sx={{ color: 'red' }}>
+                {row.change}
+              </TableCell>
+              <TableCell align="right" sx={{ color: 'red' }}>
+                {row.percentageChange}
+              </TableCell>
+              <TableCell align="right">
+                <IconButton aria-label="expand row" size="small">
+                  <ArrowDownwardIcon />
+                </IconButton>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+
+        
+      </Table>
+    </TableContainer>
     </Box>
+    </Box>
+    </Box>
+    
   );
 }
