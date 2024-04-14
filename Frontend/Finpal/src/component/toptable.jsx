@@ -10,7 +10,8 @@ import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import TrendingDownIcon from '@mui/icons-material/TrendingDown';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
+import StockDialog from './Dialog';
 
 const StockTable = () => {
   const [stocks, setStocks] = useState([]);
@@ -75,9 +76,12 @@ const StockTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      <Box>
       <Typography variant="h6" component="div" style={{ textAlign: "center", padding: "1rem" }}>
         Total Investment: ₹{total.investment.toFixed(2)}, Total Value: ₹{total.currentValue.toFixed(2)}, Total Returns: ₹{total.returns.toFixed(2)}
       </Typography>
+      <StockDialog />
+      </Box>
     </Paper>
   );
 };

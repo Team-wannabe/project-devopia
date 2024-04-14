@@ -1,4 +1,4 @@
-import { Box, Container,} from "@mui/material";
+import { Box, Container, Typography,} from "@mui/material";
 import Sidenav from "../component/sidenav";
 import SimpleAreaChart from "../component/Graph";
 import InvestmentComponent from "../component/card-dash";
@@ -6,8 +6,10 @@ import StockTable from "../component/toptable";
 import Cumulative from "../component/cumulative";
 import Expense from "../component/Expense";
 import BalanceComponent from "../component/Blances";
+import ReactSpeedometer from "react-d3-speedometer";
 
 export const Dashboard = () => {
+
   return (
     <Box>
     <Sidenav />
@@ -21,6 +23,14 @@ export const Dashboard = () => {
       <Cumulative />
       <Expense />
       <BalanceComponent />
+      </Box>
+      <Box ml={54} mb={-10} mt={5} >
+      <ReactSpeedometer 
+      value={800}
+      startColor="green"
+      endColor="red"
+      currentValueText=" HIGH Risk "
+      />
       </Box>
       <iframe width="1150" height="400" src="https://rss.app/embed/v1/wall/trle22W9o8UTorHS" frameborder="0"></iframe>
     </Container>
