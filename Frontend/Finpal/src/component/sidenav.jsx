@@ -14,6 +14,7 @@ import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Logo from "../assets/finpal-removebg-preview.png";
 import { Link } from "react-router-dom";
+import { Recommend } from "@mui/icons-material";
 
 function Sidenav() {
   return (
@@ -68,6 +69,12 @@ function Sidenav() {
             <ListItemText primary="Support" />
           </ListItem>
         </List>
+        <ListItem button component={Link} to="/stockrecommendation">
+            <ListItemIcon>
+              <Recommend />
+            </ListItemIcon>
+            <ListItemText primary="Recommendation" />
+          </ListItem>
         </Box>
         <Divider />
         <List>
