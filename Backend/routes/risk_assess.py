@@ -47,3 +47,12 @@ def calculate_portfolio_risk(total_investment, stock_investment, bonds_investmen
     print(risk_level)
     return jsonify({'risk_level': risk_level, 'total_risk': total_risk})
 
+
+total_investment = 100000  # Total investment amount in your base currency (e.g., INR, USD)
+stock_investment = 40000  # Investment in stocks
+bonds_investment = 20000  # Investment in bonds
+gold_investment = 15000  # Investment in gold
+cash_investment = 20000  # Investment in cash
+real_estate_investment = 5000  # Investment in real estate
+
+risk_assess_bp.calculate_portfolio_risk(total_investment, stock_investment, bonds_investment, gold_investment, cash_investment, real_estate_investment)
